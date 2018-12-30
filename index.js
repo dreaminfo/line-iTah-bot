@@ -88,7 +88,7 @@ const replyStyle = (token, texts) => {
     }
   } else if (texts.indexOf('iTah') !== -1 && texts.length > 4) {
     const result = randomText(natural.item);
-    return client.replyMessage(event.replyToken, { type: 'text', text: result });
+    return client.replyMessage(token, { type: 'text', text: result });
   } else {
     throw new Error(`Unknown message: ${JSON.stringify(texts)}`);
   }
