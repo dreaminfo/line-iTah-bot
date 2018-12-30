@@ -60,13 +60,8 @@ function handleText(message, event) {
 
   switch (message.text) {
     case 'iTah' :
-      if (message.text.length > 4) {
-        const result = randomText(natural.item);
-        return client.replyMessage(event.replyToken, { type: 'text', text: result });
-      } else {
-        const result = randomText(call.item);
-        return client.replyMessage(event.replyToken, { type: 'text', text: result });
-      }
+      const result = randomText(call.item);
+      return client.replyMessage(event.replyToken, { type: 'text', text: result });
     case 'iTah help' :
       return client.replyMessage(event.replyToken, { type: 'text', text: help.item });
     case 'iTah ออกไปได้และ' :
@@ -91,6 +86,9 @@ const replyStyle = (token, texts) => {
     } else {
       return client.replyMessage(token, { type: 'text', text: result });
     }
+  } else if (texts.indexOf('iTah') !== -1 && texts.length > 4) {
+    const result = randomText(natural.item);
+    return client.replyMessage(event.replyToken, { type: 'text', text: result });
   } else {
     throw new Error(`Unknown message: ${JSON.stringify(texts)}`);
   }
