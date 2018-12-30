@@ -1,8 +1,9 @@
 'use strict';
 
-const help = require('./help.json');
-const bitch = require('./bitch.json');
-const call = require('./callMe.json');
+const help = require('./message/help.json');
+const bitch = require('./message/bitch.json');
+const call = require('./message/callMe.json');
+const natural = require('./message/natural.json');
 const line = require('@line/bot-sdk');
 const express = require('express');
 const config = require('./config.json');
@@ -59,8 +60,13 @@ function handleText(message, event) {
 
   switch (message.text) {
     case 'iTah' :
-      const result = randomText(call.item);
-      return client.replyMessage(event.replyToken, { type: 'text', text: result });
+      if (message.text.length > 4) {
+        const result = randomText(natural.item);
+        return client.replyMessage(event.replyToken, { type: 'text', text: result });
+      } else {
+        const result = randomText(call.item);
+        return client.replyMessage(event.replyToken, { type: 'text', text: result });
+      }
     case 'iTah help' :
       return client.replyMessage(event.replyToken, { type: 'text', text: help.item });
     case 'iTah ออกไปได้และ' :
